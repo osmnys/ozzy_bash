@@ -1,20 +1,16 @@
 #!/bin/bash
 
-# Verzeichnisse und Ausgabedatei
 DIR1="/path/to/first/directory"
 DIR2="/path/to/second/directory"
 OUTPUT_FILE="comparison_output.txt"
 
-# Datei leeren oder erstellen
 > "$OUTPUT_FILE"
 
-# Funktion zum Vergleichen von zwei Dateien und Schreiben der Unterschiede in die Ausgabedatei
 compare_files() {
     local file1=$1
     local file2=$2
     local output_file=$3
     
-    # Nummerierung der Zeilen in den Dateien und dann diff anwenden
     diff_output=$(diff -y --left-column <(cat -n "$file1") <(cat -n "$file2"))
     
     if [ -n "$diff_output" ]; then
@@ -24,7 +20,6 @@ compare_files() {
     fi
 }
 
-# Hauptskript
 for file1 in "$DIR1"/*; do
     filename=$(basename "$file1")
     file2="$DIR2/$filename"
